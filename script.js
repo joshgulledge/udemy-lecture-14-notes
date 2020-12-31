@@ -5,10 +5,11 @@ const Person = function (firstName, birthYear) {
   this.firstName = firstName;
   this.birthYear = birthYear;
 
-  //never do this. this function will be carried with every instance
-  this.calAge = function () {
-    console.log(2021 - this.birthYear);
-  };
+  // //never do this. this function will be carried with every instance
+  //   this.calAge = function () {
+  //     console.log(2021 - this.birthYear);
+  //   };
+  //  --instead put it in the protype, it will be inherited
 };
 
 // to call a constructor function use "new"
@@ -29,3 +30,18 @@ const tim = 'Tim';
 console.log(josh instanceof Person);
 console.log(tim instanceof Person);
 // ^ returns bool
+
+// ---- Prototypes ----
+
+Person.prototype.calAge = function () {
+  console.log(2021 - this.birthYear);
+};
+
+console.log(Person.prototype);
+
+josh.calAge();
+bethany.calAge();
+
+console.log(josh.__proto__ === Person.prototype);
+console.log(Person.prototype.isPrototypeOf(josh));
+console.log(Person.prototype.isPrototypeOf(Person));
