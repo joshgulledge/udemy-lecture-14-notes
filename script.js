@@ -115,9 +115,10 @@ const secondCar = new Car('Mercedes', 95);
 // ------  classes  ------
 
 // class expression
+
 const PersonCl = class {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
   calAge() {
@@ -126,12 +127,30 @@ const PersonCl = class {
   }
   //   when you put a method outside of the sonstructor--
   // --its going to .protoype and not the object.
+
+  get futureAge() {
+    return 2050 - this.birthYear;
+  }
+
+  // setting a property thats already declared
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else {
+      alert(`${name} is not a full name`);
+    }
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
 };
 
-const timothy = new PersonCl('Timothy', 1989);
+const timothy = new PersonCl('Timothy Moore', 1989);
 timothy.calAge();
+console.log(timothy.futureAge);
 
 // class declaration
+
 class PeopleCl {
   constructor(firstName, birthYear) {
     this.firstName = firstName;
@@ -145,5 +164,24 @@ PeopleCl.prototype.greet = function () {
 
 const genre = new PeopleCl('Genre', 1994);
 
-console.log(timothy, genre);
+// console.log(timothy, genre);
 genre.greet();
+
+const bankAcc = {
+  owner: 'Josh',
+  cashFlow: [25, 900, 12, 45, 500],
+
+  get latest() {
+    return this.cashFlow.pop();
+  },
+
+  // setters need one argument
+  set latest(cash) {
+    this.cashFlow.push(cash);
+  },
+};
+
+// both getters and setters are like a property
+console.log(bankAcc.latest);
+bankAcc.latest = 62;
+console.log(bankAcc.latest);
