@@ -238,7 +238,7 @@ beth.calAge();
 DATA CAR 1: 'Ford' going at 120 km/h
 
 GOOD LUCK 😀
-*/
+
 
 const Car = class {
   constructor(make, speed) {
@@ -272,3 +272,45 @@ car1.accelerate();
 car1.brake();
 car1.mph;
 car1.newSpeed = 80;
+
+*/
+
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calAge = function () {
+  console.log(2021 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+  // this.firstName = firstName;
+  // this.birthYear = birthYear;
+
+  Person.call(this, firstName, birthYear);
+  // ^better solution- but first we have to set the this--
+  // keyword to the current object.
+
+  this.course = course;
+};
+
+Student.prototype = Object.create(Person.prototype);
+// ^this sets a new empty obj linked to Person.prototype --
+// --as the prototype obj for Student.
+Student.prototype.constructor = Student;
+
+Student.prototype.introduce = function () {
+  console.log(
+    `Hey! My name is ${this.firstName} and im a student of ${this.course}. `
+  );
+};
+
+const peter = new Student('Peter', 1999, 'Physics');
+console.log(peter);
+peter.introduce();
+peter.calAge();
+
+console.log(peter instanceof Student);
+console.log(peter instanceof Person);
+console.log(peter instanceof Object);
