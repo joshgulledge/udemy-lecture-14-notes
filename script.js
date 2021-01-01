@@ -80,6 +80,8 @@ DATA CAR 2: 'Mercedes' going at 95 km/h
 GOOD LUCK 😀
 */
 
+/*
+
 const Car = function (make, speed) {
   this.make = make;
   this.speed = speed;
@@ -156,6 +158,11 @@ class PeopleCl {
     this.firstName = firstName;
     this.birthYear = birthYear;
   }
+
+  // static method- not on the prototype and not inherited
+  static hey() {
+    console.log('Hello there');
+  }
 }
 
 PeopleCl.prototype.greet = function () {
@@ -185,3 +192,33 @@ const bankAcc = {
 console.log(bankAcc.latest);
 bankAcc.latest = 62;
 console.log(bankAcc.latest);
+
+*/
+
+// ------ Object . create ------
+
+// will be a prototype so put proto in name
+const PersonProto = {
+  calAge() {
+    const age = 2021 - this.birthYear;
+    console.log(age);
+  },
+
+  // this helps make it easier to declare properties
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+  // ^ NOT a constructor function.
+};
+
+const jacob = Object.create(PersonProto);
+// ^ manually sets the prototype for the object
+
+jacob.name = 'Jacob';
+jacob.birthYear = 2003;
+jacob.calAge();
+
+const beth = Object.create(PersonProto);
+beth.init('Beth', 1995);
+beth.calAge();
