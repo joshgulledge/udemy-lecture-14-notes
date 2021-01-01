@@ -106,8 +106,44 @@ Car.prototype.brake = function () {
 const firstCar = new Car('BMW', 120);
 const secondCar = new Car('Mercedes', 95);
 
-firstCar.accelerate();
-secondCar.accelerate();
+// firstCar.accelerate();
+// secondCar.accelerate();
 
-firstCar.brake();
-secondCar.brake();
+// firstCar.brake();
+// secondCar.brake();
+
+// ------  classes  ------
+
+// class expression
+const PersonCl = class {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  calAge() {
+    const age = 2021 - this.birthYear;
+    console.log(age);
+  }
+  //   when you put a method outside of the sonstructor--
+  // --its going to .protoype and not the object.
+};
+
+const timothy = new PersonCl('Timothy', 1989);
+timothy.calAge();
+
+// class declaration
+class PeopleCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+}
+
+PeopleCl.prototype.greet = function () {
+  console.log(`${this.firstName} wants to say hello.`);
+};
+
+const genre = new PeopleCl('Genre', 1994);
+
+console.log(timothy, genre);
+genre.greet();
