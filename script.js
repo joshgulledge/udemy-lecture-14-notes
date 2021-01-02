@@ -330,7 +330,7 @@ console.log(peter instanceof Object);
 DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
 
 GOOD LUCK 😀
-*/
+
 
 const Car = function (make, speed) {
   this.make = make;
@@ -380,3 +380,71 @@ tesla.brake();
 ford.gas();
 ford.brake();
 // ford.chargeBattery();
+
+*/
+
+class Account {
+  // public fields
+  locale = navigator.language;
+
+  // private fields
+  #movements = [];
+  #pin;
+
+  // ^these will be on instances not prototypes
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    // this.locale = navigator.language;
+
+    // protected property
+    this.#pin = pin;
+    // this._movements = [];
+    // ^ lets others know to not access it
+  }
+
+  // moveMoney(value) {
+  //   this.movements.push(value);
+  //   console.log(
+  //     `You ${value > 0 ? 'deposited' : 'withdrew'} ${Math.abs(value)} ${
+  //       this.currency
+  //     }.`
+  //   );
+  // }
+
+  // public methods
+  getMovements() {
+    return this.#movements;
+  }
+  deposit(value) {
+    this.#movements.push(value);
+  }
+
+  withdraw(value) {
+    this.deposit(-value);
+  }
+
+  requestLoan(val) {
+    if (this._approveLoan(val)) {
+      console.log('Loan Approved');
+      this.deposit(val);
+    }
+  }
+
+  // private methods
+  // #approveLoan(val) {
+  _approveLoan(val) {
+    return true;
+  }
+}
+
+const acc1 = new Account('Josh', 'Dollar', 1234);
+console.log(acc1);
+// acc1.moveMoney(250);
+// acc1.moveMoney(-50);
+acc1.deposit(350);
+acc1.withdraw(150);
+acc1.requestLoan(125);
+console.log(acc1.getMovements());
+// console.log(acc1.#movements);
